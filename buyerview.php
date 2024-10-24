@@ -99,6 +99,70 @@ include('sellerpost2.php');
             padding: 10%;
         }
 
+
+        .user-pic{
+            cursor:pointer;
+
+        }
+
+        .sub-menu-wrap{
+            position:absolute;
+            top:100%;
+            right:0%;
+            width:320px;
+            max-height:0px;
+            /* display:none; */
+            visibility:hidden;
+            transition: max-height 0.8s;
+
+
+        }
+        .sub-menu-wrap.open-menu{
+            visibility:visible;
+            height:400px;
+        }
+        .sub-menu{
+            background:#fff;
+            padding: 20px;
+            margin: 12px;
+
+        }
+        .user-info{
+            display:flex;
+            align-items:center;
+
+        }
+        .user-info p{
+            font-weight:500;
+        }
+        .sub-menu hr{
+            width: 100%;
+            border:0px;
+            height:1px;
+            background:#ccc;
+            margin: 15px 10px;
+        }
+        
+        .sub-menu p{
+            width: 100%;
+        }
+        .sub-menu-link{
+            display:flex;
+            align-items:center;
+            text-decoration:none;
+            color:#525252;
+            margin: 12px;
+            padding:5px;
+        }
+        .sub-menu-link:hover p{
+            color: #000;
+            font-weight:600px;
+        } 
+
+
+
+
+
         .separator {
             height: 20px;
 
@@ -271,9 +335,13 @@ include('sellerpost2.php');
                 <li><a href="buyerview.php" class="active">Home</a></li>
                 <li><a href="#">Shop</a></li>
                 <li><a href="contactbuyer.php">Contact</a></li>
-                <li><a href="#"><i class="fa-solid fa-user"></i></a></li>
-                <li>
-                    <p> Hello,
+                <img src="assets/user-nav.png" class="user-pic" alt="" style="height:30px; width:30px;"  onclick="toggleMenu();">
+            </ul>
+            <div class="sub-menu-wrap" id="subMenu">
+                    <div class="sub-menu">
+                        <div class="user-info">
+                        <img src="assets/usersample.png" style="width:70px; height:70px;"alt="#">
+                        <p>
                         <?php
                         if(isset($_SESSION['Email'])){
                             $Email = $_SESSION['Email'];
@@ -284,8 +352,23 @@ include('sellerpost2.php');
                         }
                         ?>
                     </p>
-                </li>
-            </ul>
+                        </div>
+                        <hr>
+                        <a href="#" class="sub-menu-link">
+                        <i class="fa-solid fa-user"></i>
+                            <p>Edit Profile</p>
+                            <span>
+                            </span>
+                        </a>
+                        <a href="#" class="sub-menu-link">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                            <p>Logout</p>
+                            <span>
+                            </span>
+                        </a>
+
+                    </div>
+                </div>
         </div>
     </section>
     <div class="separator"></div>
@@ -376,6 +459,13 @@ include('sellerpost2.php');
 
 
     <script src="script.js"></script>
+    <script>
+    let subMenu = document.getElementById("subMenu");
+
+    function toggleMenu(){
+        subMenu.classList.toggle("open-menu");
+    }
+</script>
 </body>
 
 </html>
