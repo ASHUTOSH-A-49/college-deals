@@ -1,6 +1,8 @@
 <?php
 // session_start();
 include('sellerpost2.php');
+include ('connect.php');
+$user_email = $_SESSION['Email'];
 
 
 ?>
@@ -340,7 +342,20 @@ include('sellerpost2.php');
             <div class="sub-menu-wrap" id="subMenu">
                     <div class="sub-menu">
                         <div class="user-info">
-                        <img src="assets/usersample.png" style="width:70px; height:70px;"alt="#">
+                        <?php
+                        $select = mysqli_query($conn,"SELECT * FROM `users` WHERE users.Email='$user_email'");
+                        if (mysqli_num_rows($select) > 0){
+                            $fetch = mysqli_fetch_assoc($select);
+                        }
+        
+                        if ($fetch['profile_pic'] == ''){
+                            echo '<img src="assets/usersample.png" style="width:70px; height:70px;">';
+                        }
+                        else{
+                            echo '<img style="width:70px; height:70px;" src="profile-pics/'.$fetch['profile_pic'].'">';
+                        }
+                        // <img src="assets/usersample.png" style="width:70px; height:70px;"alt="#">
+                        ?>
                         <p>
                         <?php
                         if(isset($_SESSION['Email'])){
@@ -351,10 +366,10 @@ include('sellerpost2.php');
                             }
                         }
                         ?>
-                    </p>
+                        </p>
                         </div>
                         <hr>
-                        <a href="#" class="sub-menu-link">
+                        <a href="edit_profile.php" class="sub-menu-link">
                         <i class="fa-solid fa-user"></i>
                             <p>Edit Profile</p>
                             <span>
