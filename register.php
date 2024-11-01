@@ -16,7 +16,7 @@ if(isset($_POST['signup'])){
                       VALUES('$Name','$Email','$Password','$Phone')";
             if($conn->query($insertquery)==TRUE){
                 
-                header("location: choice.html");
+                header("location: home.html");
             }
             else{
                 echo "Error:".$conn->error;
