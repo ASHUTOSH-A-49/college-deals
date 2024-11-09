@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+#toggle{
+  visibility: hidden;
+  opacity: 0;
+  position: relative;
+  z-index: -1;
+}
+
+#toggle:checked ~ dialog {
+  display: block;
+}
+
+label{
+  background: skyblue;
+  color: white;
+  padding: .5em 1em;
+  border-radius: 4px;
+}
+@keyframes appear {
+  0%{
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+dialog{
+  animation: appear 350ms ease-in 1;
+  max-width: 500px;
+}
+
+    </style>
+</head>
+<body>
+    <input type="checkbox" id="toggle">
+        <label for="toggle">Open Overlay</label>
+
+        <dialog>
+        <p>
+    
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa nihil dolore similique quis qui ad blanditiis ex eum! Enim maiores ipsam fugiat officiis earum distinctio natus reprehenderit aliquam est iusto!
+        </p>
+    
+  
+        <label for="toggle">close overlay</label>
+        </dialog>
+</body>
+</html>
