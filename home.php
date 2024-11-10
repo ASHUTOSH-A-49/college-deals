@@ -6,6 +6,9 @@
     <title>College Deals</title>
     <script src="https://kit.fontawesome.com/4dcb19159e.js" crossorigin="anonymous"></script>
     <style>
+/* ----------------------------**------------------------**------------------------------**-------------------------------**--------------------- */
+        /* THIS IS THE ACTUAL HOMEPAGE THAT APPEARS WHEN OPENED THE SITE  */
+/* ----------------------------------**--------------------**-----------------------------**-----------------**-------------------------------- */
         body{
             width: 100%;
             background-color: #c9d6ff;
@@ -171,6 +174,46 @@
             color: blue;
 
         }
+        .choice{
+            background-color: white;
+            width: 450px;
+            /* height:300px ; */
+            padding: 0.5rem;
+            margin: 50px auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0,1, 0.9);
+            text-align: center;
+
+        }
+        .optn1{
+            background-color:rgb(39, 255, 78);
+            width: 100px;
+            margin: 20px auto;
+            padding: 0.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0,1, 0.9);
+            text-align: center;
+            border-radius: 10px;
+        }
+        .optn2{
+            background-color:rgb(255, 6, 6);
+            width: 100px;
+            margin: 20px auto;
+            padding: 0.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0,1, 0.9);
+            text-align: center;
+            border-radius: 10px;
+            color: white;
+        }
+        
+        .optn1 button a{
+            text-decoration: none;
+            color: #07001f;
+        }
+        .optn2 button a{
+            color: white;
+            text-decoration: none;
+            color: #07001f;
+        }
 
         
     </style>
@@ -190,7 +233,7 @@
         </div>
         </section>
         <section class="login">
-            <div class="container" id="signin" class='signin'>
+            <div class="container" id="signin" class="signin" >
                 <h1 class="form-title">Login</h1>
                 <form method="post" action="register.php">
                     <div class="input-group">
@@ -200,7 +243,7 @@
                     </div>
                     <div class="input-group">
                         <i class="fa-solid fa-lock"></i>
-                        <input type="password" name="password"  id="password" placeholder="password" maxlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+                        <input type="password" name = "password" id="password" placeholder="password" maxlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
                         <label for="password">password</label>
                     </div>
                     <p class="recover">
@@ -209,10 +252,19 @@
                     <input type="submit"   class="btn" value="login" name="signin" >
                     <div class="links">
                         <p>Don't have an account yet?</p>
-                        <button id="signupbutton" ><a href="Signup.HTML">Sign Up</a></button>
+                        <button id="signupbutton" ><a href="Signup.php">Sign Up</a></button>
                     </div>         
                 </form>
         </section>
+        
+        <Section id='choice'>
+            <div class="choice" style="display: none;">
+                <h1>You are willing to?</h1>
+                <div class="optn1"><button><a href="buyerview.html">BUY</a></button></div>
+                <div class="optn2"><button><a href="#">SELL</a></button></div>
+
+            </div>
+        </Section>
 
     <script src="signup-login.js"></script>
 </body>

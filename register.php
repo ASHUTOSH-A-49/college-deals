@@ -14,6 +14,10 @@ if(isset($_POST['signup'])){
     $Email=$_POST['Email'];
     $Password=$_POST['password'];
     $Phone=$_POST['Phone'];
+    $filename = $_FILES["profile_pic"]["name"];
+    $tempname = $_FILES["profile_pic"]["tmp_name"];
+    $folder = "./profile-pics/" . $filename;
+
 
     $checkEmail = "SELECT * FROM users where Email='$Email'";
     $result=$conn->query($checkEmail);
@@ -21,8 +25,8 @@ if(isset($_POST['signup'])){
         echo"Email Address Already Exists !";
     }
     else{
-        $insertquery="INSERT INTO users(Name,Email,Password,Phone,Status)
-                      VALUES('$Name','$Email','$Password','$Phone','$status')";
+        $insertquery="INSERT INTO users(profile_pic,Name,Email,Password,Phone,Status)
+                      VALUES('$filename','$Name','$Email','$Password','$Phone','$status')";
             if($conn->query($insertquery)==TRUE){
                 
                 header("location: home.html");

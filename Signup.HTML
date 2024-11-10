@@ -177,7 +177,7 @@
     <section class="sign-up">
         <div class="container" id="signup" class="signup" >
             <h1 class="form-title">Register</h1>
-            <form method="post" action="register.php">
+            <form method="post" action="register.php" enctype="multipart/form-data">
                 <div class="input-group">
                     <i class="fa-solid fa-user"></i>
                     <input type="text" name="Fname" id="Fname" placeholder="Enter Your Name" required>
@@ -198,10 +198,14 @@
                     <input type="tel" name="Phone" placeholder="888 888 8888" pattern="[0-9]{10}" maxlength="10"  title="Ten digits number" required>    
                     <label>Phone</label>
                 </div>
+                <div class="input-group" >
+                    <input class="form-control" name="profile_pic" type="file" id="select_profile_pic">
+                    <label>Profile-pic</label>
+                </div>
                 <input type="submit"  class="btn" value="Sign Up" name="signup" >
                 <div class="links">
                     <p>Already have an account?</p>
-                    <button id="signinbutton" ><a href="home.html">Login</a></button>
+                    <button id="signinbutton" ><a href="home.php">Login</a></button>
                 </div>         
             </form>
     </section>

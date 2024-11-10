@@ -198,10 +198,15 @@
                     <input type="tel" name="Phone" id="Phone" placeholder="888 888 8888" pattern="[0-9]{3} [0-9]{3} [0-9]{4}" maxlength="12"  title="Ten digits code" required>    
                     <label>Phone</label>
                 </div>
+                <div class="input-group">
+                    <input class="form-control" name="profile_pic" type="file" id="select_profile_pic">
+                    <label>Profile-pic</label>
+                </div>
+                
                 <input type="submit"  class="btn" value="Sign Up" name="signup" >
                 <div class="links">
                     <p>Already have an account?</p>
-                    <button id="signinbutton" ><a href="home.html">Login</a></button>
+                    <button id="signinbutton" ><a href="home.php">Login</a></button>
                 </div>         
             </form>
     </section>
