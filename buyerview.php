@@ -191,6 +191,7 @@ $user_email = $_SESSION['Email'];
             padding: 10px;
             border: 0.1px solid black;
             border-radius: 15px;
+            font-size: larger;
 
         }
 
@@ -321,6 +322,196 @@ $user_email = $_SESSION['Email'];
         .button:hover {
             box-shadow: 0px 0px 7px 4px rgba(0, 255, 255, 0.6);
         } */
+
+
+
+         /* ----------------chatmodal--------------  */
+       #toggle{
+        visibility: hidden;
+        opacity: 0;
+        position: relative;
+        z-index: -1;
+      }
+      
+      #toggle:checked ~ dialog {
+        display: block;
+      }
+      
+      label{
+        background: skyblue;
+        color: white;
+        padding: .5em 1em;
+        border-radius: 4px;
+      }
+      @keyframes appear {
+        0%{
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+      }
+      
+      dialog{
+        animation: appear 350ms ease-in 1;
+        margin-top: 40%;
+        overflow-y:scroll;
+        max-width: 500px;
+      }
+      
+      /* -----------chat------------------  */
+      .wrapper{
+          background: #fff;
+          max-width:450px;
+          width:100%;
+          border-radius:16px;
+          box-shadow: 0 0 128px 0 rgba(0,0,0,0.1)
+                      0 32px 64px -48px rgba(0,0,0,0.5);
+      }
+      .users{
+          padding:25px 30px;
+      
+      }
+      .chathead{
+      display:flex;
+      align-items:center;
+      padding-bottom:20px;
+      border-bottom:1px solid #e6e6e6;
+      justify-content: space-between;
+      
+      }
+      .wrapper img{
+          object-fit:cover;
+          border-radius:50%;
+      
+      }
+      .chathead img{
+          height:50px;
+          width:50px;
+      
+      }
+      :is(.users,.user-list) .content{
+          display:flex;
+          align-items:center;
+      }
+      
+      :is(.users, .users-list)  .content .details{
+          color:#000;
+          margin-left:20px;
+      
+      }
+      
+      :is(.users, .user-list) .details span{
+          font-size:18px;
+          font-weight:500;
+      }
+      
+      .users .search{
+          margin:20px 0;
+          display: flex;
+          position:relative;
+          align-items:center;
+          justify-content: space-between;
+      }
+      
+      .users .search .text{
+          font-size:18px;
+      
+      }
+      
+      .users .search input{
+          position:absolute;
+          height:42px;
+          width: calc(100% - 50px);
+          font-size: 16px;
+          padding:0 13px;
+          border: 1px solid #e6e6e6;
+          outline:none;
+          border-radius: 5px 0 0 5px;
+          opacity:0;
+          pointer-events:none;
+          transition: all 0.2s ease;
+      }
+      
+      .users .search input.show{
+          opacity:1;
+          pointer-events:auto;
+      
+      }
+      .users .search button{
+          position: relative;
+          z-index:1;
+          width:47px;
+          height:42px;
+          font-size:17px;
+          cursor:pointer;
+          border:none;
+          background:#fff;
+          color:#3E424B;
+          outline:none;
+          border-radius: 0 5px 5px 0;
+          transition: all 0.2s ease;
+      
+      }
+      
+      .users .search button.active{
+          background:#3E424B;
+          color:#fff;
+      
+      }
+      
+      .search button.active i::before{
+          content:'\f00d';
+      
+      }
+      .users-list{
+          max-height:350px;
+          overflow-y:auto;
+      
+      }
+      
+      :is(.users-list, .chat-box)::-webkit-scrollbar{
+          width: 0px;
+      
+      }
+      
+      .details p{
+          color: #67676a;
+      } 
+       .users-list a{
+          padding-bottom:10px;
+          margin-bottom:15px;
+          padding-right:15px;
+          border-bottom-color:#f1f1f1;
+      }
+      .users-list a:last-child{
+          margin-bottom:0px;
+          border-bottom:none;
+      
+      }
+      .users-list a img{
+          height:40px;
+          width:40px;
+      
+      }
+      .users-list a .details p{
+          color:#67676a
+      }
+      .users-list a .status-dot{
+          font-size:12px;
+          color:#468669;
+          padding-left:10px;
+      }
+      .users-list a .status-dot.offline{
+          color:#ccc;
+      }
+
+
+
+
+
+
+
+
+
     </style>
 </head>
 
@@ -336,6 +527,71 @@ $user_email = $_SESSION['Email'];
             <ul id="navbar">
                 <li><a href="buyerview.php" class="active">Home</a></li>
                 <li><a href="#">Shop</a></li>
+                <input type="checkbox" id="toggle">
+    <label for="toggle">Open Messages</label>
+
+    <dialog>
+    
+    <div class="wrapper">
+        <section class="users">
+            <div class="chathead">
+                <div class="content">
+
+                    
+                    <!-- <img src="assets/usersample.png" alt=""> -->
+                    <?php
+                        $select = mysqli_query($conn,"SELECT * FROM `users` WHERE users.Email='$user_email'");
+                        if (mysqli_num_rows($select) > 0){
+                            $fetch = mysqli_fetch_assoc($select);
+                        }
+        
+                        if ($fetch['profile_pic'] == ''){
+                            echo '<img src="assets/usersample.png" style="width:70px; height:70px;">';
+                        }
+                        else{
+                            echo '<img style="width:70px; height:70px;" src="profile-pics/'.$fetch['profile_pic'].'">';
+                        }
+                        // <img src="assets/usersample.png" style="width:70px; height:70px;"alt="#">
+                        ?>
+                    <div class="details">
+                        <span>
+                        <?php
+                        if(isset($_SESSION['Email'])){
+                            $Email = $_SESSION['Email'];
+                            $query = mysqli_query($conn,"SELECT * FROM `users` WHERE users.Email='$Email'");
+                            while ($row=mysqli_fetch_array($query)) {
+                                echo $row['Name'];
+                            }
+                        }
+                        ?>
+                        </span>
+                        <p><?php if(isset($_SESSION['Email'])){
+                            $Email = $_SESSION['Email'];
+                            $query = mysqli_query($conn,"SELECT * FROM `users` WHERE users.Email='$Email'");
+                            while ($row=mysqli_fetch_array($query)) {
+                                echo $row['Status'];
+                            }
+                        }?></p>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="search">
+                <span class="text">
+                    Select an user to start
+                </span>
+                <input type="text" placeholder = "Enter name to search...">
+                <button><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+            <div class="users-list">
+
+            </div>
+        </section>
+    </div>
+    
+  
+    <label for="toggle">close messages</label>
+    </dialog>
                 <li><a href="contactbuyer.php">Contact</a></li>
                 <img src="assets/user-nav.png" class="user-pic" alt="" style="height:30px; width:30px;"  onclick="toggleMenu();">
             </ul>
@@ -423,7 +679,7 @@ $user_email = $_SESSION['Email'];
         // include("post.php");
         // global $posts;
         
-        foreach($posts as $post)
+        foreach($postsbuyer as $post)
         {
             // if($post['Email'] == $Email){
 
@@ -457,6 +713,18 @@ $user_email = $_SESSION['Email'];
                 <div class="item_price">
                     <h3>Price = ₹<?=$post['Price']?></h3>
                 </div>
+                <button class = "chatsellerbtn" style = "padding:0 0; font-size:large;  height:20px; display:flex; align-items:center;">
+                <div class = "contactseller">
+                    <?php
+                    $post_id = $post['Email'];
+                    $sql = "SELECT * FROM `users` WHERE users.Email = '$post_id'";
+                    $query = mysqli_query($conn,$sql);
+                    $row = mysqli_fetch_assoc($query);
+                    
+                    ?>
+                    <h6><a href = "chatbuyer.php?Email =<?php echo $row['Email'];?>" style = "text-decoration:none; color:black;">Contact Seller</a></h6>
+                    </button>
+                </div>
             </div>
         
 
@@ -473,7 +741,10 @@ $user_email = $_SESSION['Email'];
 
 
 
-    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="custom.js"></script> -->
+    <script src="users.js"></script>
+    
     <script>
     let subMenu = document.getElementById("subMenu");
 

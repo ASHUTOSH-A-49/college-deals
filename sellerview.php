@@ -629,18 +629,6 @@ $user_email = $_SESSION['Email'];
                 <div class="item_price">
                     <h3>Price = ₹<?=$post['Price']?></h3>
                 </div>
-                <button>
-                <div class = "contactseller">
-                    <?php
-                    $post_id = $post['Email'];
-                    $sql = "SELECT * FROM `users` WHERE NOT users.Email = '$post_id'";
-                    $query = mysqli_query($conn,$sql);
-                    $row = mysqli_fetch_assoc($query);
-                    
-                    ?>
-                    <h6><a href = "chat.php?Email =<?php echo $row['Email'];?>" style = "text-decoration:none; color:black;">Contact Seller</a></h6>
-                </div>
-                </button>
             </div>
         
 

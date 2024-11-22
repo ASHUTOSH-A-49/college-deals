@@ -98,5 +98,18 @@ function getPost(){
 $posts = getPost();
     
 
+function getPostbuyer(){
+    global $conn;
+    $query = "SELECT posts.Email,posts.post_title,posts.post_img,posts.post_desc,posts.purchase_date,posts.post_date,posts.Price ,users.Name,users.Email,users.Phone FROM posts JOIN users ON users.Email = posts.Email WHERE NOT users.Email = '{$_SESSION['Email']}' ";
+
+    $run = mysqli_query($conn,$query);
+    return mysqli_fetch_all($run,true);
+}
+
+
+$postsbuyer = getPostbuyer();
+    
+
+
 
 ?>
