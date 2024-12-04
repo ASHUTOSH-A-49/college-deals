@@ -743,7 +743,7 @@ $user_email = $_SESSION['Email'];
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- <script src="custom.js"></script> -->
-    <script src="users.js"></script>
+    <script src="usersbuyer.js"></script>
     
     <script>
     let subMenu = document.getElementById("subMenu");

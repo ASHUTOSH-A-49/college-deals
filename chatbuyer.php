@@ -29,7 +29,7 @@ include_once "header.php";
                 if(mysqli_num_rows($sql)>0){
                     $row = mysqli_fetch_assoc($sql);
                 }else{
-                    header("location: sellerview.php");
+                    header("location: buyerview.php");
                 }
                 ?>
 
